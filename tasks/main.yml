@@ -5,7 +5,7 @@
 - name: mbsec-chrony | Ensure the Chrony package is installed
   package:
     name: "{{ chrony_package_name }}"
-    state: "{{ chrony_package_state }}" 
+    state: "{{ chrony_package_state }}"
 
 - name: mbsec-chrony | Verify the existence of ntp service
   service:

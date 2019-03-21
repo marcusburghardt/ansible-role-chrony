@@ -1,0 +1,9 @@
+# Ansible Server. Usado para notificações.
+# Implicit groups: 'all' and 'ungrouped'
+
+# General Linux. Use this child group to centralize the connections configurations, set in var/linux.yml or group_vars/linux.yml
+[linux:children]
+linux-server
+
+[linux-servers]
+#myserver.domain.com

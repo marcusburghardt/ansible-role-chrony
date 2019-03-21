@@ -1,0 +1,34 @@
+---
+- name: mbsec-chrony | Add the OS specific variables
+  include_vars: "{{ ansible_facts['os_family']|lower }}.yml"
+
+- name: mbsec-chrony | Ensure the Chrony package is installed
+  package:
+    name: "{{ chrony_package_name }}"
+    state: "{{ chrony_package_state }}" 
+
+- name: mbsec-chrony | Verify the existence of ntp service
+  service:
+    name: "{{ ntp_service_name }}"
+  register: ntp_service
+
+- name: mbsec-chrony | Create the config file based on standard settings
+  template:
+    src: chrony.conf.j2
+    dest: "{{ chrony_config_location }}"
+  notify:
+    - restart chrony
+
+- name: mbsec-chrony | Stop and mask ntpd service
+  systemd:
+    name: "{{ ntp_service_name }}"
+    state: stopped
+    masked: yes
+  when: ntp_service.status.LoadState == "loaded"
+
+- name: mbsec-chrony | Ensure status and enable conf of the service
+  service:
+    name: "{{ chrony_service_name }}"
+    state: "{{ chrony_service_state }}"
+    enabled: "{{ chrony_service_enabled }}"
+...

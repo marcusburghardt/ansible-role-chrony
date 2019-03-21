@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Marcus Burghardt
+  description: Role for install and configure Chrony with the best practices
+  company: MBSEC
+  license: MIT
+  min_ansible_version: 2.4
+  min_ansible_container_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+  galaxy_tags:
+    - system
+    - chrony
+    - ntp
+    - instrastructure
+    - mbsec
+dependencies: []
